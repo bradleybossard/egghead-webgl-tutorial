@@ -11,9 +11,10 @@ function initGL() {
 function createShaders() {
   var vs = '';
   vs += 'attribute vec4 coords;';
+  vs += 'attribute float pointSize;';
   vs += 'void main(void) {';
   vs += '  gl_Position = coords;';
-  vs += '  gl_PointSize = 10.0;';
+  vs += '  gl_PointSize = pointSize;';
   vs += '}';
 
   var vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -39,6 +40,9 @@ function createShaders() {
 function createVertices() {
   var coords = gl.getAttribLocation(shaderProgram, 'coords');
   gl.vertexAttrib3f(coords, -0.5, 0, 0);
+
+  var pointSize = gl.getAttribLocation(shaderProgram, 'pointSize');
+  gl.vertexAttrib1f(pointSize, 10);
 }
 
 function draw() {
