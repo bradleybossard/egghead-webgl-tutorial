@@ -22,8 +22,10 @@ function createShaders() {
   gl.compileShader(vertexShader);
 
   var fs = '';
+  fs += 'precision mediump float;';
+  fs += 'uniform vec4 color;';
   fs += 'void main(void) {';
-  fs += '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);';
+  fs += '  gl_FragColor = color;';
   fs += '}';
 
   var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -43,6 +45,9 @@ function createVertices() {
 
   var pointSize = gl.getAttribLocation(shaderProgram, 'pointSize');
   gl.vertexAttrib1f(pointSize, 10);
+
+  var color = gl.getUniformLocation(shaderProgram, 'color');
+  gl.uniform4f(color, 0, 1, 0, 1);
 }
 
 function draw() {
